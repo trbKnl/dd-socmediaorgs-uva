@@ -1,3 +1,8 @@
+# Data donation study at the UvA
+
+No actual data will be donated during this study. The researcher sit together with the participant and will discuss the visualized data on screen together.
+The research will involve talking about recognizable companies on Facebook, Instagram and X.
+
 <p align="center">
   <a href="https://github.com/d3i-infra/feldspar">
     <img width="40%" height="40%" src="./public/port_logo.svg">
