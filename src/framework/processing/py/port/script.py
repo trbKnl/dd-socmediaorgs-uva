@@ -32,7 +32,7 @@ def process(session_id):
     platforms = [
         ("Instagram", extract_instagram, instagram.validate),
         ("Facebook", extract_facebook, facebook.validate),
-        ("Twitter", extract_twitter, twitter.validate),
+        ("X", extract_twitter, twitter.validate),
     ]
 
     # For each platform
@@ -167,8 +167,18 @@ def extract_twitter(twitter_zip: str, _) -> list[props.PropsUIPromptConsentFormT
 
     df = twitter.ad_engagements_to_df(twitter_zip)
     if not df.empty:
+        wordcloud = { 
+            "title": {
+                "nl":"Authors of ads weighted by view count", 
+                "en":"Authors of ads weighted by view count"
+            },
+            "type": "wordcloud",
+            "textColumn": "Advertiser name",
+            "valueColumn":  "Number of views",
+            "tokenize": False,
+        }
         table_title = props.Translatable({ "en": "Your engagement with ads", "nl": "Your engagement with ads:"})
-        tables = create_consent_form_tables("twitter_ad_engagements", table_title, df) 
+        tables = create_consent_form_tables("twitter_ad_engagements", table_title, df, [wordcloud]) 
         tables_to_render.extend(tables)
 
     df = twitter.replies_to_df(twitter_zip)
